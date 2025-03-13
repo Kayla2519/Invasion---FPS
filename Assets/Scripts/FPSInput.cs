@@ -41,6 +41,13 @@ public class FPSInput : MonoBehaviour
             deltaZ *= sprintMultiplyer;
         }
 
+        Vector3 move = new Vector3(deltaX, 0, deltaZ);
+
+        if (move.magnitude > 0.1f)
+        {
+            move = transform.TransformDirection(move);
+            _charController.Move(move * Time.deltaTime);
+        }
 
         // For jumping //
 
@@ -62,20 +69,7 @@ public class FPSInput : MonoBehaviour
             _velocity.y += gravity * Time.deltaTime;
         }
 
-
-        Vector3 movement = new Vector3(deltaX, _velocity.y, deltaZ);
-
-        // Was stopping the sprinting from working
-        //movement = Vector3.ClampMagnitude(movement, speed);
-
-        // Was affecting the jump function
-        //movement.y = gravity;
-
-        movement *= Time.deltaTime;
-        movement = transform.TransformDirection(movement);
-        _charController.Move(movement);
-
-        //transform.Translate (deltaX*Time.deltaTime, 0, deltaZ*Time.deltaTime);
+        _charController.Move(new Vector3(0, _velocity.y, 0) * Time.deltaTime);
     }
 }
 

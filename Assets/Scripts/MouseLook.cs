@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class MouseLook : MonoBehaviour
 {
-
-
     //enumerated structure to associate names with settings
     public enum RotationAxes
     {
